@@ -46,15 +46,17 @@ echo '</pre>'; */
 							<h4>Todas tarefas</h4>
 							<hr />
 
-							<?php foreach($tarefas as $indice => $tarefa) { ?>
+							<?php foreach ($tarefas as $indice => $tarefa) { ?>
 								<div class="row mb-3 d-flex align-items-center tarefa">
-								<div class="col-sm-9"><?= $tarefa->tarefa ?> (<?= $tarefa->status ?>)</div>
-								<div class="col-sm-3 mt-2 d-flex justify-content-between">
-									<i class="fas fa-trash-alt fa-lg text-danger"></i>
-									<i class="fas fa-edit fa-lg text-info"></i>
-									<i class="fas fa-check-square fa-lg text-success"></i>
+									<div class="col-sm-9" id="tarefa_<?= $tarefa->id ?>">
+										<?= $tarefa->tarefa ?> (<?= $tarefa->status ?>)
+									</div>
+									<div class="col-sm-3 mt-2 d-flex justify-content-between">
+										<i class="fas fa-trash-alt fa-lg text-danger"></i>
+										<i class="fas fa-edit fa-lg text-info" onclick="edit(<?= $tarefa->id ?>, '<?= $tarefa->tarefa ?>')"></i>
+										<i class="fas fa-check-square fa-lg text-success"></i>
+									</div>
 								</div>
-							</div>
 
 							<?php } ?>
 
@@ -64,6 +66,59 @@ echo '</pre>'; */
 			</div>
 		</div>
 	</div>
+
+	<script>
+		function edit(id, txt_task) {
+			//create form edit
+			let form = document.createElement('form')
+			form.action = '#';
+			form.method = 'post';
+			form.className = 'row';
+
+			//create input to text enter
+			let inputTask = document.createElement('input')
+			inputTask.type = 'text';
+			inputTask.name = 'task';
+			inputTask.className = 'col-9 form-control';
+			inputTask.value = txt_task;
+
+			//create input hidden for id task
+			let inputId = document.createElement('input');
+			inputId.type = 'hidden';
+			inputId.name = 'id';
+			inputId.value = 'id';
+
+			//create button to submit form
+			let button = document.createElement('button')
+			button.type = 'submit';
+			button.className = 'col-3 btn btn-info';
+			button.innerHTML = 'Atualizar';
+
+			//include inputTask in form
+			form.appendChild(inputTask);
+
+			//include inputId in form
+			form.appendChild(inputId);
+
+			//include button in form
+			form.appendChild(button);
+
+			//test
+			//console.log(form)
+
+			//select div task
+			let task = document.getElementById('tarefa_' + id)
+
+			//clear text task to include in form
+			task.innerHTML = '';
+
+			//include form in page
+			task.insertBefore(form, task[0]);
+
+			//alert(txt_task)
+
+		}
+	</script>
 </body>
 
 </html>
