@@ -71,14 +71,14 @@ echo '</pre>'; */
 		function edit(id, txt_task) {
 			//create form edit
 			let form = document.createElement('form')
-			form.action = '#';
+			form.action = 'tarefa_controller.php?acao=atualizar';
 			form.method = 'post';
 			form.className = 'row';
 
 			//create input to text enter
 			let inputTask = document.createElement('input')
 			inputTask.type = 'text';
-			inputTask.name = 'task';
+			inputTask.name = 'tarefa';
 			inputTask.className = 'col-9 form-control';
 			inputTask.value = txt_task;
 
@@ -86,7 +86,7 @@ echo '</pre>'; */
 			let inputId = document.createElement('input');
 			inputId.type = 'hidden';
 			inputId.name = 'id';
-			inputId.value = 'id';
+			inputId.value = id;
 
 			//create button to submit form
 			let button = document.createElement('button')
