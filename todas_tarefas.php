@@ -53,8 +53,11 @@ echo '</pre>'; */
 									</div>
 									<div class="col-sm-3 mt-2 d-flex justify-content-between">
 										<i class="fas fa-trash-alt fa-lg text-danger" onclick="remove(<?= $tarefa->id ?>)"></i>
+
+										<?php if($tarefa->status == 'pendente') { ?>
 										<i class="fas fa-edit fa-lg text-info" onclick="edit(<?= $tarefa->id ?>, '<?= $tarefa->tarefa ?>')"></i>
-										<i class="fas fa-check-square fa-lg text-success"></i>
+										<i class="fas fa-check-square fa-lg text-success" onclick="taskDone(<?= $tarefa->id ?>)"></i>
+										<?php } ?>
 									</div>
 								</div>
 
@@ -121,6 +124,10 @@ echo '</pre>'; */
 
 		function remove(id) {
 			location.href = 'todas_tarefas.php?acao=remove&id=' + id;
+		}
+
+		function taskDone(id){
+			location.href = 'todas_tarefas.php?acao=taskDone&id=' + id;
 		}
 	</script>
 </body>
